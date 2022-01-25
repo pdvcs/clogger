@@ -46,11 +46,11 @@ fn write_line(line: &str) -> Result<(), CloggerError> {
 }
 
 fn main() {
-    let reader = BufReader::new(stdin());
+    let standard_in = BufReader::new(stdin());
 
     // read stdin line by line
-    for (_, line) in reader.lines().enumerate() {
-        let line = line
+    for r_line in standard_in.lines() {
+        let line = r_line
             .map_err(|e| format!("error reading stdin: {}", e))
             .unwrap();
         let r = write_line(&line);
